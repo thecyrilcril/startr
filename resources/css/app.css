@@ -1,0 +1,27 @@
+@tailwind base;
+[x-cloak] { display: none !important; }
+@tailwind components;
+@tailwind utilities;
+@font-face {
+    font-family: 'BR Firma';
+    src: url('fonts/BRFirma-Bold.x2025.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BR Firma';
+    src: url('fonts/BRFirma-SemiBold.x2025.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'BR Firma';
+    src: url('fonts/BRFirma-Regular.x2025.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
