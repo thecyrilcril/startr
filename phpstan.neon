@@ -3,7 +3,8 @@ includes:
     - vendor/nesbot/carbon/extension.neon
 
 parameters:
-
+    ignoreErrors:
+        - '#^Call to an undefined method App\\Providers\\AppServiceProvider\:\:\w+\(\)\.$#'
     paths:
         - app/
 

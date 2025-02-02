@@ -68,7 +68,7 @@ return [
     */
 
     'timezone' => env('APP_TIMEZONE', 'UTC'),
-
+    'display_timezone' => 'Africa/Lagos',
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
