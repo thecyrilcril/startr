@@ -27,7 +27,7 @@ jobs:
       - name: Cache Dependencies
         uses: actions/cache@v4
         with:
-          path: ~/.composer/cache/files
+          path: ~/.composer/cache
           key: dependencies-php-composer-${{ hashFiles('composer.lock') }}
 
       - name: Setup PHP
