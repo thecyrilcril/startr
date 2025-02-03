@@ -51,12 +51,23 @@ jobs:
       - name: Install PHP dependencies
         run: composer install --no-interaction --no-progress --ansi
 
-      - name: Get NPM cache directory
+      # Debug step: Verify the NPM cache directory
+      - name: Debug NPM Cache Path
+        run: |
+          echo "NPM cache directory: $(npm config get cache)"
+
+      # Ensure the NPM cache directory exists before caching
+      - name: Get and Prepare NPM Cache Directory
         id: npm-cache-dir
         shell: bash
-        run: echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
+        run: |
+          echo "NPM_CACHE_DIR=$(npm config get cache)" >> $GITHUB_ENV
+          mkdir -p $(npm config get cache)  # Ensure the directory exists
 
-      - name: Cache dependencies
+      - name: Install dependencies
+        run: npm install
+
+      - name: Cache NPM dependencies
         id: npm-cache
         uses: actions/cache@v4
         with:
@@ -64,11 +75,6 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-
-
-      - name: Install dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm install
 
       - name: Build dependencies
         run: npm run build
