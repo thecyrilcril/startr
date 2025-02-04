@@ -61,34 +61,38 @@ final class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 
+    /**
+     * @return Attribute<string, string>
+     */
     protected function lastName(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucfirst($value),
-            set: fn(string $value) => mb_strtolower($value),
+            get: fn(mixed $value): string => is_string($value) ? ucfirst($value) : '',
+            set: fn(string $value): string => mb_strtolower($value),
         );
     }
-
+    /** @return Attribute<string, string> */
     protected function firstName(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucfirst($value),
-            set: fn(string $value) => mb_strtolower($value),
+            get: fn(mixed $value): string => is_string($value) ? ucfirst($value) : '',
+            set: fn(string $value): string => mb_strtolower($value),
         );
     }
-
+    /** @return Attribute<string|null, string|null> */
     protected function otherName(): Attribute
     {
         return Attribute::make(
-            get: fn(string|null $value) => $value ? ucfirst($value) : null,
-            set: fn(string|null $value) => $value ? mb_strtolower($value) : null,
+            get: fn(mixed $value): ?string => is_string($value) ? ucfirst($value) : null,
+            set: fn(string|null $value): ?string => $value ? mb_strtolower($value) : null,
         );
     }
 
+    /** @return Attribute<string, never> */
     protected function fullName(): Attribute
     {
         return Attribute::make(
-            get: fn(string $value) => ucwords($value),
+            get: fn(mixed $value): string => ucwords(type($value)->asString()),
         );
     }
 }
