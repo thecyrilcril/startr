@@ -10,6 +10,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "archtechx/enums": "^1.1",
         "gehrisandro/tailwind-merge-laravel": "^1.2",
         "laravel/framework": "^11.41.3",
         "laravel/tinker": "^2.10.1",
@@ -35,7 +36,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Utilities/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

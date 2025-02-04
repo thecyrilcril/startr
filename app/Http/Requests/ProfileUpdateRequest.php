@@ -21,7 +21,8 @@ final class ProfileUpdateRequest extends FormRequest
         $user = type($this->user())->as(User::class);
 
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:20'],
+            'first_name' => ['required', 'string', 'max:20'],
             'email' => [
                 'required',
                 'string',

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Traits\BlueprintMacros;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ use Illuminate\Validation\Rules\Password;
 
 final class AppServiceProvider extends ServiceProvider
 {
+    use BlueprintMacros;
     /**
      * Register any application services.
      */
@@ -32,6 +34,7 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureUrls();
         $this->configureVite();
         $this->configurePasswordValidation();
+        $this->registerBlueprintMacros();
     }
 
     /**
@@ -86,4 +89,5 @@ final class AppServiceProvider extends ServiceProvider
     {
         Password::defaults(callback: fn() => $this->app->isProduction() ? Password::min(8)->uncompromised() : null);
     }
+
 }

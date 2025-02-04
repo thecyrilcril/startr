@@ -14,12 +14,24 @@ return new class () extends Migration {
     {
         Schema::create('users', function (Blueprint $table): void {
             $table->id();
-            $table->string('name');
+            $table->char(column: 'key', length: 36)->unique();
+            $table->string(column: 'last_name', length: 20);
+            $table->string(column: 'first_name', length: 20);
+            $table->string(column: 'other_name', length: 20)->nullable();
+            $table->whenSQlite(
+                fn($table) => $table->string('full_name')
+                    ->virtualAs("IFNULL(last_name, '') || ' ' || IFNULL(first_name, '') || ' ' || IFNULL(other_name, '')")->index(),
+            );
+            $table->whenMySQL(
+                fn($table) => $table->string('full_name')
+                    ->virtualAs("CONCAT_WS(' ', last_name, first_name, other_name)")->index(),
+            );
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->engine = 'InnoDB';
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table): void {
