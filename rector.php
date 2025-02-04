@@ -15,7 +15,7 @@ return RectorConfig::configure()
     ])
     ->withSkip([
         // AddOverrideAttributeToOverriddenMethodsRector::class,
-         __DIR__ . '/app/Models'
+        __DIR__ . '/app/Models',
     ])
     ->withPreparedSets(
         deadCode: true,
