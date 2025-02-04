@@ -8,6 +8,8 @@ use App\Traits\BlueprintMacros;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
@@ -35,6 +37,8 @@ final class AppServiceProvider extends ServiceProvider
         $this->configureVite();
         $this->configurePasswordValidation();
         $this->registerBlueprintMacros();
+        $this->configureRelationMorphMaps();
+        $this->disableCSRFProtection();
     }
 
     /**
@@ -88,6 +92,26 @@ final class AppServiceProvider extends ServiceProvider
     private function configurePasswordValidation(): void
     {
         Password::defaults(callback: fn() => $this->app->isProduction() ? Password::min(8)->uncompromised() : null);
+    }
+
+    /**
+     * Configure relationship morph maps
+     */
+    private function configureRelationMorphMaps(): void
+    {
+        Relation::enforceMorphMap([
+            'user' => \App\Models\User::class,
+        ]);
+    }
+
+    /**
+     * Disable CSRF protection for routes and URIs.
+     */
+    private function disableCSRFProtection(): void
+    {
+        VerifyCsrfToken::except([
+
+        ]);
     }
 
 }
