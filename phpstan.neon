@@ -7,6 +7,7 @@ parameters:
         - '#^Call to an undefined method App\\Providers\\AppServiceProvider\:\:\w+\(\)\.$#'
     paths:
         - app/
+        - src/Domain/
 
     # Level 10 is the highest level
     level: max
