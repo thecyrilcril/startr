@@ -5,6 +5,7 @@
     'processRoute' => '',
     'revertRoute' => '',
     'name' => '',
+    'formContext' => false,
 ])
 <div x-data="{
         name: `{{ $name }}`,
@@ -51,6 +52,11 @@
                 }
             })
 
+{{--             const filepondRoot = document.querySelector('.filepond--root');
+            if (filepondRoot) {
+              filepondRoot.setAttribute('id', $id('file-pond'));
+            } --}}
+
             this.pond.on('processfile', (error, file) => {
                 $dispatch('set-file-value', { value: file.serverId })
             });
@@ -71,8 +77,9 @@
         type="file"
         class="mt-1 block w-full" required autofocus autocomplete="off"
     />
-
-{{--     <template x-if="form.invalid(`${name}`)">
+    @if($formContext === true)
+    <template x-if="form.invalid(`${name}`)">
         <div x-text="form.errors[`${name}`]" class="text-sm text-rose-500"></div>
-    </template> --}}
+    </template>
+    @endif
 </div>

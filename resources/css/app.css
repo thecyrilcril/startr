@@ -1,5 +1,10 @@
 @tailwind base;
 [x-cloak] { display: none !important; }
+
+body .choices__item {
+    @apply dark:text-gray-800;
+}
+
 @tailwind components;
 @tailwind utilities;
 @font-face {

@@ -11,11 +11,18 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
 
+import Choices from 'choices.js';
+import "choices.js/public/assets/styles/choices.css";
+
+import flatpickr from "flatpickr";
+import 'flatpickr/dist/themes/confetti.css';
+
 window.Alpine = Alpine;
 window.FilePond = FilePond;
 window.FilePondPluginImagePreview = FilePondPluginImagePreview;
 window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
 window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
+window.Choices = Choices;
 
 Alpine.plugin(persist);
 
