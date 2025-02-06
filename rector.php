@@ -12,7 +12,7 @@ return RectorConfig::configure()
         __DIR__ . '/config',
         __DIR__ . '/database',
         __DIR__ . '/public',
-        __DIR__ . '/src/Domain/',
+        __DIR__ . '/src/Domain',
     ])
     ->withSkip([
         // AddOverrideAttributeToOverriddenMethodsRector::class,
