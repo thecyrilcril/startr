@@ -52,11 +52,6 @@
                 }
             })
 
-{{--             const filepondRoot = document.querySelector('.filepond--root');
-            if (filepondRoot) {
-              filepondRoot.setAttribute('id', $id('file-pond'));
-            } --}}
-
             this.pond.on('processfile', (error, file) => {
                 $dispatch('set-file-value', { value: file.serverId })
             });

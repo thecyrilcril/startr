@@ -11,12 +11,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Ramsey\Uuid\Uuid;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-final class User extends Authenticatable implements MustVerifyEmail
+final class User extends Authenticatable implements HasMedia, MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
     use HasUuids;
+    use InteractsWithMedia;
     use Notifiable;
 
     /**

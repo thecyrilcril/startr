@@ -3,6 +3,8 @@ import './bootstrap';
 import Alpine from 'alpinejs';
 import persist from '@alpinejs/persist'
 
+import Precognition from 'laravel-precognition-alpine';
+
 import * as FilePond from 'filepond';
 
 import 'filepond/dist/filepond.min.css';
@@ -31,4 +33,5 @@ Alpine.store('darkMode', {
     toggle() {this.dark = !this.dark}
 });
 
+Alpine.plugin(Precognition);
 Alpine.start();

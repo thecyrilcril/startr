@@ -7,17 +7,39 @@
                 country: ``,
                 toggle: ``,
                 date: ``,
+
             }"
+
             class="grid grid-cols-1 mt-8 lg:grid-cols-4 gap-4">
             <div>
-                <x-filepond
-                    label="Add a File"
-                    maxSize="600KB"
-                    name="photo"
-                    processRoute="{{ route('file-pond-process') }}"
-                    revertRoute="{{ route('file-pond-revert') }}"
-                    ::value=""
-                />
+                <form
+                    x-data="{
+                        form: $form(`post`, `{{ route('upload-file') }}`, {
+                            file: ``
+                        }),
+                        async submit() {
+                            try {
+                               const response = await this.form.submit();
+                            } catch(error) {
+                                console.log(error)
+                           }
+                        }
+                    }"
+                    x-on:set-file-value="form.file = $event.detail.value"
+                    @submit.prevent="submit"
+                >
+                    <x-filepond
+                        label="Add a File"
+                        maxSize="600KB"
+                        name="photo"
+                        processRoute="{{ route('file-pond-process') }}"
+                        revertRoute="{{ route('file-pond-revert') }}"
+                        ::value=""
+                    />
+                    <x-primary-button>
+                        Upload
+                    </x-primary-button>
+                </form>
             </div>
             <div>
                 @php
