@@ -8,6 +8,7 @@
     'formContext' => false,
 ])
 <div x-data="{
+        fileUrl: `{{ $value }}`,
         name: `{{ $name }}`,
         pond: null,
         unload() {
@@ -30,7 +31,7 @@
                 maxFileSize: `{{ $maxSize }}`,
                 @if ($value)
                 files: [{
-                    source: `{{ $value }}`,
+                    source: this.fileUrl,
                     options: {
                         type: 'local',
                     }
@@ -63,6 +64,8 @@
     }"
     x-on:filepond:remove-files.window="unload"
     x-id="['file-pond']"
+    x-modelable="fileUrl" x-model="{{ $value }}"
+
 >
     <x-input-label ::for="$id('file-pond')" value="{{ $label }}" />
     <x-text-input
