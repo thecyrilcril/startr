@@ -7,7 +7,9 @@ use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn() => view('index'));
+Route::get('/', fn() => view('index', [
+    'photo_url' => App\Models\User::query()->first()?->media->last()->original_url,
+]));
 
 Route::view(uri: '/contact', view: 'contact')->name('contact');
 

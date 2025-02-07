@@ -23,6 +23,7 @@
             <div class="px-4 mt-6">
                 {{ $slot }}
             </div>
+            <x-confirm />
         </main>
         @include('layouts._footer')
     </body>

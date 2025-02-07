@@ -49,7 +49,10 @@
 
             <!-- Page Content -->
             <main>
+                <section>
                 {{ $slot }}
+                </section>
+                <x-confirm />
             </main>
         </div>
     </body>

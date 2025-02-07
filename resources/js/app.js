@@ -1,6 +1,7 @@
 import './bootstrap';
 
 import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
 import persist from '@alpinejs/persist'
 
 import Precognition from 'laravel-precognition-alpine';
@@ -26,6 +27,37 @@ window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
 window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
 window.Choices = Choices;
 
+Alpine.store('confirmModal', {
+    isVisible: false,
+    message: '',
+    resolve: null,
+
+    show(msg) {
+        this.message = msg;
+        this.isVisible = true;
+        return new Promise((resolve) => {
+            this.resolve = (result) => {
+                resolve(result);
+                this.close();
+            };
+        });
+    },
+
+    confirm() {
+        if (this.resolve) this.resolve(true);
+    },
+
+    cancel() {
+        if (this.resolve) this.resolve(false);
+    },
+
+    close() {
+        this.isVisible = false;
+        this.message = '';
+        this.resolve = null;
+    }
+});
+
 Alpine.plugin(persist);
 
 Alpine.store('darkMode', {
@@ -33,5 +65,6 @@ Alpine.store('darkMode', {
     toggle() {this.dark = !this.dark}
 });
 
+Alpine.plugin(focus);
 Alpine.plugin(Precognition);
 Alpine.start();

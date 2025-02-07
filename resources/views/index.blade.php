@@ -14,6 +14,7 @@
             <div>
                 <form
                     x-data="{
+                        image: `{{ $photo_url }}`,
                         form: $form(`post`, `{{ route('upload-file') }}`, {
                             file: ``
                         }),
@@ -34,7 +35,7 @@
                         name="photo"
                         processRoute="{{ route('file-pond-process') }}"
                         revertRoute="{{ route('file-pond-revert') }}"
-                        ::value=""
+                        value="image"
                     />
                     <x-primary-button>
                         Upload
@@ -62,6 +63,11 @@
             </div>
             <div>
                 <x-flatpickr name="date" x_model="date" label="Pick date" />
+            </div>
+            <div>
+                    <x-primary-button type="button" @click="async () => await $store.confirmModal.show(`Are you sure you want to perform a deletion?`)">
+                        Delete
+                    </x-primary-button>
             </div>
 
 
