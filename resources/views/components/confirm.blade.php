@@ -1,4 +1,4 @@
- <div x-data="$store.confirmModal" class="flex justify-center">
+ <div x-data="$store.confirm" class="flex justify-center">
      <!-- Modal -->
      <template x-teleport="body">
          <div

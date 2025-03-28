@@ -12,10 +12,11 @@
         formContext: `{{ $formContext }}`,
         async init() {
             await $nextTick();
+            console.log(this.value)
             let picker = flatpickr(this.$refs.date_picker, {
-                {{-- defaultDate: 'this.application_closed_at', --}}
+                defaultDate: this.value,
                 allowInput: true,
-                dateFormat: 'd-m-Y',
+                dateFormat: 'Y-m-d',
                 onChange: (date, dateString) => {
                     this.value = dateString
                 }

@@ -5,6 +5,8 @@
     'name' => 'default',
     'x_model',
     'formContext' => false,
+    'fetchUrl' => null,
+    'fetchOnInit' => false,
 ])
 <div
     x-data="{
@@ -12,10 +14,17 @@
         options: @js($options),
         value: ``,
         name: `{{ $name }}`,
-        formContext: `{{ $formContext }}`,
+        formContext: @js($formContext),
+        fetchUrl: `{{ $fetchUrl }}`,
+        fetchOnInit: @js($fetchOnInit),
+        get xUrl() {
+            return eval(this.fetchUrl);
+        },
+        dynamicOptions: [],
         init() {
             this.$nextTick(() => {
                 let choicesInstance = new Choices(this.$refs.select, {
+                    itemSelectText: '',
                     position: '{{ $position }}',
                     shouldSort: false,
                 });
@@ -46,14 +55,31 @@
 
                 this.$refs.select.addEventListener('change', () => {
                     this.value = choicesInstance.getValue(true);
-                    {{-- $nextTick(() => this.form.validate(this.name)); --}}
+                    if (this.formContext === true) {
+                        this.$nextTick(() => this.form.validate(this.name));
+                    }
                 });
+
+                const fetchOptions = async () => {
+                    const response = await axios.get(this.xUrl) //this[this.fetchUrl]
+                    this.dynamicOptions = response.data;
+                    this.options = this.dynamicOptions;
+                    refreshChoices();
+                };
+
+                if (this.fetchOnInit) {
+                    fetchOptions();
+                }
 
                 this.$watch('value', () => refreshChoices());
                 this.$watch('options', () => refreshChoices());
 
-            });
+                this.$watch('xUrl', () => {
+                    fetchOptions();
+                });
 
+
+            });
         }
     }"
     x-id="['choices-select']"
