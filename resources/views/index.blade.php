@@ -7,7 +7,15 @@
                 country: ``,
                 toggle: ``,
                 date: ``,
+                async deleteSomething() {
+                    const removeRecord = await $store.confirm.show(`Are you sure you want to perform a deletion?`)
+                    if (removeRecord === true) {
+                        console.log(`Record deleted`)
+                        return
+                        }
+                        console.log(`Record left alone`)
 
+                }
             }"
 
             class="grid grid-cols-1 mt-8 lg:grid-cols-4 gap-4">
@@ -65,8 +73,13 @@
                 <x-flatpickr name="date" x_model="date" label="Pick date" />
             </div>
             <div>
-                    <x-primary-button type="button" @click="async () => await $store.confirmModal.show(`Are you sure you want to perform a deletion?`)">
+                    {{-- <x-primary-button type="button" @click="async () => await $store.confirm.show(`Are you sure you want to perform a deletion?`)"> --}}
+                    <x-primary-button type="button" @click="deleteSomething">
                         Delete
+                    </x-primary-button>
+
+                    <x-primary-button type="button" @click="$dispatch('notify', {type: 'success', content: `Wow, we made it!`})">
+                        Notifty
                     </x-primary-button>
             </div>
 

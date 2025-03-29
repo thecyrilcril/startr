@@ -27,7 +27,7 @@ window.FilePondPluginFileValidateType = FilePondPluginFileValidateType;
 window.FilePondPluginFileValidateSize = FilePondPluginFileValidateSize;
 window.Choices = Choices;
 
-Alpine.store('confirmModal', {
+Alpine.store('confirm', {
     isVisible: false,
     message: '',
     resolve: null,
